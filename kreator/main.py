@@ -1,6 +1,8 @@
 
 from cement import App, TestApp, init_defaults
 from cement.core.exc import CaughtSignal
+
+from kreator.controllers.pyramid import Pyramid
 from .core.exc import kreatorError
 from .controllers.base import Base
 
@@ -9,7 +11,7 @@ CONFIG = init_defaults('kreator')
 CONFIG['kreator']['foo'] = 'bar'
 
 
-class kreator(App):
+class Kreator(App):
     """Kreator CLI primary application."""
 
     class Meta:
@@ -42,11 +44,12 @@ class kreator(App):
 
         # register handlers
         handlers = [
-            Base
+            Base,
+            Pyramid,
         ]
 
 
-class kreatorTest(TestApp,kreator):
+class KreatorTest(TestApp, Kreator):
     """A sub-class of kreator that is better suited for testing."""
 
     class Meta:
@@ -54,7 +57,7 @@ class kreatorTest(TestApp,kreator):
 
 
 def main():
-    with kreator() as app:
+    with Kreator() as app:
         try:
             app.run()
 
