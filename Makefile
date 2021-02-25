@@ -4,11 +4,11 @@ clean:
 	find . -name '*.py[co]' -delete
 
 virtualenv:
-	virtualenv --prompt '|> kreator <| ' env
-	env/bin/pip install -r requirements-dev.txt
-	env/bin/python setup.py develop
+	python3 -m venv --prompt '|> kreator <| ' venv
+	venv/bin/pip install -r requirements-dev.txt
+	venv/bin/python setup.py develop
 	@echo
-	@echo "VirtualENV Setup Complete. Now run: source env/bin/activate"
+	@echo "VirtualENV Setup Complete. Now run: source venv/bin/activate"
 	@echo
 
 test:
