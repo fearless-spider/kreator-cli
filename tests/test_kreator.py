@@ -34,3 +34,19 @@ def test_command1():
         data,output = app.last_rendered
         assert data['foo'] == 'not-bar'
         assert output.find('Foo => not-bar')
+
+
+def test_pyramid():
+    # test command1 without arguments
+    argv = ['pyramid']
+    with KreatorTest(argv=argv) as app:
+        app.run()
+        data,output = app.last_rendered
+        output.find('Pyramid')
+
+    # test command1 with arguments
+    argv = ['pyramid', '--config', 'kreator.yml']
+    with KreatorTest(argv=argv) as app:
+        app.run()
+        data,output = app.last_rendered
+        assert data['config'] == 'kreator.yml'
