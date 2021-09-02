@@ -2,6 +2,7 @@
 from cement import App, TestApp, init_defaults
 from cement.core.exc import CaughtSignal
 
+from kreator.controllers.django import Django
 from kreator.controllers.pyramid import Pyramid
 from .core.exc import kreatorError
 from .controllers.base import Base
@@ -46,6 +47,7 @@ class Kreator(App):
         handlers = [
             Base,
             Pyramid,
+            Django,
         ]
 
 

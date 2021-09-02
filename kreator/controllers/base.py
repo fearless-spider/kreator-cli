@@ -17,7 +17,7 @@ class Base(Controller):
         description = 'Create python project from command line'
 
         # text displayed at the bottom of --help output
-        epilog = 'Usage: kreator command1 --foo bar'
+        epilog = 'Usage: kreator django --config kreator.yml'
 
         # controller level arguments. ex: 'kreator --version'
         arguments = [
@@ -32,29 +32,3 @@ class Base(Controller):
         """Default action if no sub-command is passed."""
 
         self.app.args.print_help()
-
-
-    @ex(
-        help='example sub command1',
-
-        # sub-command level arguments. ex: 'kreator command1 --foo bar'
-        arguments=[
-            ### add a sample foo option under subcommand namespace
-            ( [ '-f', '--foo' ],
-              { 'help' : 'notorious foo option',
-                'action'  : 'store',
-                'dest' : 'foo' } ),
-        ],
-    )
-    def command1(self):
-        """Example sub-command."""
-
-        data = {
-            'foo' : 'bar',
-        }
-
-        ### do something with arguments
-        if self.app.pargs.foo is not None:
-            data['foo'] = self.app.pargs.foo
-
-        self.app.render(data, 'command1.jinja2')
